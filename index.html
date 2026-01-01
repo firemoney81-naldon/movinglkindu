@@ -1,23 +1,502 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  <style>
+    /* 폰트, 기본 설정 */
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      color: #333;
+      background: #f4f6f8; /* 부드러운 배경색 */
+    }
+
+    /* 레이아웃 컨테이너 */
+    header, nav, section, footer {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+      background: #ffffff;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 부드러운 그림자 */
+    }
+
+    /* 헤더 디자인 */
+    header {
+      padding: 30px;
+      background: linear-gradient(135deg, #fce4e4 0%, #ffe0b2 100%); /* 그라데이션 배경 */
+      border-radius: 10px;
+      text-align: center;
+    }
+    header h1 {
+      margin-bottom: 10px;
+      color: #d84315; /* 주황색 계열 */
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+    header p {
+      color: #555;
+      font-size: 1.1rem;
+    }
+
+    /* 네비게이션 디자인 */
+    nav {
+      background: #ff7043; /* 주황색 배경 */
+      border-radius: 10px;
+      text-align: center;
+      padding: 15px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky; /* 네비게이션 고정 */
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 18px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      opacity: 0.9;
+      background-color: #e64a19; /* 호버 시 배경색 변경 */
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    /* 섹션 제목 */
+    h2 {
+      border-bottom: 4px solid #ff7043; /* 주황색 밑줄 */
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    h3 {
+      color: #d84315; /* 주황색 계열 */
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+
+    /* 콘텐츠 카드 디자인 (서비스, 사례 등) */
+    .서비스_카드, .사례_카드, .정보_카드 {
+      border: 1px solid #eee;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      background: #fff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .서비스_카드:hover, .사례_카드:hover, .정보_카드:hover {
+      box-shadow: 0 6px 18px rgba(255, 112, 67, 0.2); /* 부드러운 호버 효과 */
+      transform: translateY(-5px);
+    }
+
+    /* CTA 버튼 디자인 */
+    .cta {
+      display: inline-block;
+      background-color: #ff7043;
+      color: white;
+      padding: 18px 40px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 20px;
+    }
+    .cta:hover {
+      background-color: #e64a19;
+      transform: scale(1.05);
+    }
+
+    /* 폼 디자인 */
+    form label {
+      display: block;
+      margin-bottom: 12px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #333;
+    }
+    form input, form select, form textarea {
+      width: calc(100% - 22px);
+      padding: 12px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    form input:focus, form select:focus, form textarea:focus {
+      border-color: #ff7043;
+      outline: none;
+      box-shadow: 0 0 5px rgba(255, 112, 67, 0.3);
+    }
+    form button {
+      margin-top: 20px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    /* FAQ 디자인 */
+    dl.faq dt {
+      font-weight: 700;
+      margin-top: 25px;
+      cursor: pointer;
+      color: #d84315;
+      font-size: 1.1rem;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #eee;
+    }
+    dl.faq dd {
+      margin-left: 15px;
+      margin-top: 10px;
+      color: #555;
+      padding-left: 10px;
+      border-left: 3px solid #ff7043;
+      line-height: 1.7;
+    }
+
+    /* 표 디자인 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 0.95rem;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+      font-weight: 700;
+      color: #333;
+    }
+    td.highlight {
+      background-color: #fff3e0;
+      font-weight: 600;
+    }
+
+    /* 이미지 스타일 (추가될 경우) */
+    .image-container {
+      width: 100%;
+      margin: 20px 0;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 링크 스타일 */
+    a {
+      color: #ff7043;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* 정보성 텍스트 블록 */
+    .info-block {
+      background-color: #fcfcfc;
+      border: 1px solid #ffe0b2;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+    .info-block strong {
+      color: #d84315;
+    }
+
+  </style>
+
+  <!-- JSON-LD Schema for LocalBusiness & OfferCatalog -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LocalBusiness",
+    "name":"대전 이사 전문업체",
+    "image":"https://www.yourdomain.kr/images/daejeon_moving_logo.png",
+    "telephone":"010-1234-5678",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"대전광역시 서구 둔산로 ○○",
+      "addressLocality":"대전광역시",
+      "addressRegion":"대전",
+      "postalCode":"35242",
+      "addressCountry":"KR"
+    },
+    "url":"https://www.yourdomain.kr/",
+    "openingHours":"Mo-Sa 09:00-19:00",
+    "areaServed":{
+      "@type":"GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 36.3504,
+        "longitude": 127.3845
+      },
+      "geoRadius": 20000,
+      "name": "대전광역시 전 지역"
+    },
+    "hasOfferCatalog":{
+      "@type":"OfferCatalog",
+      "name":"대전 이사 서비스",
+      "itemListElement":[
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"대전 포장이사"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"대전 원룸/오피스텔 이사"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"대전 사무실/기업이사"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"대전 보관이사"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"입주청소 패키지"}}
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+
+<header id="상단">
+  <h1>대전 이사 비용, 포장이사, 원룸 이사 최신 견적 가이드 (2026년 기준)</h1>
+  <p><strong>대전 이사 비용</strong>을 합리적으로 절약하고 싶으신가요? 2026년 최신 가격과 전문업체 후기를 지금 바로 확인하세요.</p>
+  <p>대전 동구, 중구, 서구, 유성구, 대덕구 전 지역 전문 서비스!</p>
+  <a href="#무료견적신청" class="cta">무료견적 신청하고 비용 절약하기</a>
+</header>
+
+<nav>
+  <a href="#비용가이드">이사 비용 가이드</a>
+  <a href="#서비스">서비스 소개</a>
+  <a href="#이사절차">이사 절차</a>
+  <a href="#고객사례">고객 사례 및 후기</a>
+  <a href="#무료견적신청">무료 견적 신청</a>
+  <a href="#자주묻는질문">FAQ</a>
+</nav>
+
+<section id="비용가이드" aria-label="대전 이사 비용 가이드">
+  <h2>대전 이사 비용, 합리적인 견적의 핵심 요소 분석</h2>
+  <div class="정보_카드">
+    <p><strong>대전 이사 비용</strong>은 단순히 짐의 양뿐만 아니라, 이사 유형, 거리, 작업 환경, 계절적 요인 등 복합적인 요소에 의해 결정됩니다. 특히 대전광역시는 둔산동, 관저동, 도안동과 같은 신흥 주거지역과 구도심이 공존하며, 아파트, 빌라, 원룸 등 주거 형태가 다양하여 정확한 견적 산출이 중요합니다. 2026년 기준으로, 저희 전문업체가 제시하는 대전 지역별 평균 이사 비용 및 산출 기준을 통해 합리적인 이사 계획을 세우실 수 있도록 돕겠습니다.</p>
+    <h3>1. 대전 이사 유형별 평균 비용 (2026년 기준)</h3>
+    <p>다음 표는 대전 지역 내에서 가장 흔하게 발생하는 이사 유형별 평균 비용을 정리한 것입니다. 이는 일반적인 견적이며, 정확한 비용은 현장 방문 견적을 통해 확정됩니다.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>이사 유형</th>
+          <th>평균 소요 시간</th>
+          <th>대전 지역 평균 비용대 (비수기 기준)</th>
+          <th>주요 서비스 특징</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>대전 포장이사 (30평대 아파트)</strong></td>
+          <td>4~6시간</td>
+          <td>110만원 ~ 150만원</td>
+          <td>포장, 운송, 정리정돈, 청소 기본 포함. 사다리차 옵션 별도.</td>
+        </tr>
+        <tr>
+          <td><strong>대전 포장이사 (20평대 아파트/빌라)</strong></td>
+          <td>3~5시간</td>
+          <td>90만원 ~ 120만원</td>
+          <td>전문 인력 2~3명, 사다리차 사용 유무에 따라 비용 변동.</td>
+        </tr>
+        <tr>
+          <td><strong>대전 원룸/오피스텔 이사</strong></td>
+          <td>2~4시간</td>
+          <td>25만원 ~ 40만원</td>
+          <td>짐 양이 적은 경우 비대면 견적 가능. 용달차/1톤 트럭 사용.</td>
+        </tr>
+        <tr>
+          <td><strong>대전 사무실 이사 (50인 규모)</strong></td>
+          <td>1~2일</td>
+          <td>250만원 ~ 400만원 이상</td>
+          <td>전문 장비 및 인력 투입. 서버/IT 장비 이송 시 특수 보험 적용.</td>
+        </tr>
+        <tr>
+          <td><strong>대전 보관이사 (1달 기준)</strong></td>
+          <td>포장/입고 + 보관료 + 출고/정리</td>
+          <td>포장이사 비용 + 보관료(월 10~20만원)</td>
+          <td>장기 보관 시 할인 적용. 창고 환경 (온습도 조절) 확인 필요.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-block">
+        <strong>[2026년 비용 변동 요인]</strong> 2026년 이사 비용은 2025년 대비 인건비 및 유류비 상승으로 소폭 상승하였습니다. 특히 손 없는 날이나 특정 주말에는 비용이 10~20% 할증될 수 있으므로, 미리 견적을 받고 예약하는 것이 중요합니다.
+    </div>
+
+    <h3>2. 대전 지역별 이사 환경 및 추가 비용 발생 요인</h3>
+    <p>대전은 동구, 중구, 서구, 유성구, 대덕구 5개 구역으로 나뉩니다. 각 구역의 주거 환경에 따라 이사 비용에 영향을 미치는 요소들이 있습니다. <strong>대전 이사 비용</strong>을 비교할 때 단순히 가격만 볼 것이 아니라, 아래 요인들을 꼼꼼히 체크해야 합니다.</p>
+    <ul>
+      <li><strong>유성구 (둔산동, 관저동, 도안동):</strong> 신축 아파트 단지가 많아 사다리차 진입이 수월한 편입니다. 다만, 신규 입주 기간에는 수요가 폭증하여 가격이 상승할 수 있습니다.</li>
+      <li><strong>중구 (문화동, 용두동):</strong> 주택가와 좁은 골목길이 많아 사다리차 사용이 어려운 경우가 있습니다. 이 경우 짐 운반 인력 추가 투입 비용이 발생할 수 있습니다.</li>
+      <li><strong>대덕구 (송촌동, 법동):</strong> 오래된 주택가와 빌라가 밀집한 지역에서는 짐의 운반 난이도가 높아질 수 있습니다.</li>
+      <li><strong>출발지/도착지 층수 및 엘리베이터 유무:</strong> 6층 이상은 사다리차 사용이 필수적입니다. 엘리베이터 사용 가능 시에도 짐의 양에 따라 추가 인력이 필요할 수 있습니다.</li>
+      <li><strong>옵션 서비스:</strong> 에어컨 탈부착, 벽걸이 TV 설치, 붙박이장 분해/조립, 입주청소 등 부가 서비스는 별도 비용이 발생합니다.</li>
+    </ul>
+
+    <h3>3. 대전 포장이사 업체 선정 시 고려사항</h3>
+    <p>대전에서 포장이사 업체를 선정할 때는 단순히 "대전 포장이사 가격"이 저렴한 곳을 선택하기보다, 서비스의 질을 함께 고려해야 합니다. 특히 <a href="https://www.yourdomain.kr/faq">정식 허가된 업체인지</a>, 이사 화물 배상 책임 보험에 가입되어 있는지 확인하는 것이 중요합니다. 저희 업체는 대전 지역 이사 전문가로 구성되어 있으며, 모든 서비스에 보험을 적용하고 있습니다.</p>
+  </div>
+</section>
+
+<section id="서비스" aria-label="서비스 소개">
+  <h2>대전 이사 서비스 상세 소개</h2>
+  <div class="서비스_카드">
+    <h3>대전 포장이사 서비스 (아파트, 빌라)</h3>
+    <p>대전 지역 포장이사 서비스는 전문 인력이 짐 포장부터 운송, 정리, 청소까지 모든 과정을 책임집니다. <strong>대전 포장이사</strong>를 찾는 고객님들이 가장 선호하는 서비스로, 짐이 많은 30평대 아파트 이사부터 꼼꼼한 정리 정돈이 필요한 빌라 이사까지 맞춤형으로 제공됩니다. 저희는 특히 짐 종류별 맞춤 포장재(가구 전용 포장재, 옷가지 전용 박스 등)를 사용하여 파손 위험을 최소화합니다. 대전 서구 둔산동, 유성구 도안동 등 신축 아파트 단지 이사 경험이 풍부하여, 복잡한 입주 절차도 원활하게 처리해 드립니다.</p>
+  </div>
+  <div class="서비스_카드">
+    <h3>대전 원룸/오피스텔 이사 (용달이사)</h3>
+    <p>대전 원룸 이사 및 오피스텔 이사는 짐의 양이 적고 이사 동선이 짧은 경우가 많습니다. 저희는 <strong>대전 원룸이사 비용</strong>을 절감할 수 있도록 반포장 이사(큰 짐만 포장) 옵션도 제공합니다. 대전 유성구 노은동, 궁동, 전민동 등 대학가 주변 오피스텔 이사 전문팀이 신속하고 정확하게 진행합니다. 짐이 적거나 1인 가구인 경우 1톤 용달 이사를 통해 더욱 합리적인 가격으로 이용할 수 있습니다.</p>
+  </div>
+  <div class="서비스_카드">
+    <h3>대전 사무실/기업이사 및 보관이사</h3>
+    <p>사무실 이전은 단순한 짐 이동이 아닌, 업무의 연속성을 보장해야 하는 전문 분야입니다. <strong>대전 사무실 이사</strong>는 서버 및 IT 장비 운송, 중요 문서 관리, 사무용 가구 배치 등 정교한 계획이 필요합니다. 저희는 대덕구 R&D 단지, 유성구 도안신도시의 기업 이사 경험을 바탕으로, 최소한의 업무 공백으로 이전 작업을 완료합니다. 또한, <strong>대전 보관이사</strong>는 입주 날짜가 맞지 않을 경우 짐을 일정 기간 동안 안전하게 보관해 드리는 서비스입니다. 대전 근교의 안전한 보관 창고를 이용하여 단기/장기 보관이 가능합니다.</p>
+  </div>
+</section>
+
+<section id="이사절차" aria-label="대전 이사 절차 및 체크리스트">
+  <h2>대전 이사 절차 및 2026년 이사 체크리스트</h2>
+  <div class="정보_카드">
+    <p>성공적인 이사는 철저한 준비에서 시작됩니다. 특히 대전 지역에서 이사를 계획 중이라면 다음의 절차를 따라 진행하시면 복잡한 이사 과정을 쉽게 관리할 수 있습니다.</p>
+    <ol>
+      <li><strong>[STEP 1] 무료 방문 견적 신청 (이사 2~3주 전):</strong> 이사 날짜가 정해지면 <a href="#무료견적신청">온라인 견적 신청</a>을 합니다. 특히 <strong>대전 이사 비용</strong>을 결정짓는 가장 중요한 단계이므로 반드시 현장 방문 견적을 받는 것이 좋습니다. 짐의 양과 특이사항(고가품, 냉장고, 붙박이장)을 전문가에게 정확히 알려주세요.</li>
+      <li><strong>[STEP 2] 업체 비교 및 계약 (이사 2주 전):</strong> 여러 업체에서 받은 견적서를 비교하여 가격뿐만 아니라 서비스 내용, 보험 가입 여부 등을 확인합니다. 계약서 작성 시 특약사항(추가 비용 발생 조건, 사후처리 규정)을 꼼꼼히 확인합니다.</li>
+      <li><strong>[STEP 3] 이사 준비 (이사 1주 전):</strong> 이사갈 집의 청소 및 정리(입주청소 옵션 선택 가능), 전입신고/전출신고 등 행정 절차를 준비합니다. 대전시의 경우 <a href="https://www.daejeon.go.kr">대전광역시청 홈페이지</a>에서 관련 정보를 확인할 수 있습니다.</li>
+      <li><strong>[STEP 4] 이사 당일 작업 진행:</strong> 포장, 운송, 정리정돈이 순차적으로 이루어집니다. 파손되기 쉬운 물품이나 중요한 서류는 직접 관리합니다.</li>
+      <li><strong>[STEP 5] 이사 완료 및 사후관리:</strong> 짐 정리가 완료되면 파손된 물품이 없는지 확인하고, 추가 AS를 요청합니다.</li>
+    </ol>
+  </div>
+
+  <div class="정보_카드">
+    <h3>이사 전후 행정 절차 (대전시 기준)</h3>
+    <p>이사 후 주소지 변경은 필수입니다. 2026년 기준으로, 전입신고는 이사 후 14일 이내에 해야 합니다. <a href="https://www.gov.kr/main?a=go.kr_main">정부24 웹사이트</a>를 통해 온라인으로 간편하게 전입신고를 할 수 있으며, 확정일자 부여 신청을 통해 주택임대차보호법의 보호를 받을 수 있습니다. 대전 지역 동 행정복지센터 방문을 통해서도 가능합니다.</p>
+    <p><strong>[참고] 이사 관련 필수 사이트:</strong></p>
+    <ul>
+      <li><a href="https://www.eais.go.kr">한국부동산원 (부동산 거래 관리)</a></li>
+      <li><a href="https://namu.wiki/w/%EC%9D%B4%EC%82%AC">나무위키 이사 항목 (일반 정보)</a></li>
+      <li><a href="https://www.consumer.go.kr/main/index.do">한국소비자원 (이사 피해 구제 정보)</a></li>
+      <li><a href="https://www.daejeon.go.kr">대전광역시청 (행정 정보)</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="고객사례" aria-label="고객 사례 및 후기">
+  <h2>대전 이사 고객 사례 및 후기 (지역별 특화 서비스)</h2>
+  <div class="사례_카드">
+    <h3>[사례 1] 대전 서구 둔산동 30평 아파트 포장이사 (2026년 3월)</h3>
+    <p><strong>이사 개요:</strong> 대전 서구 둔산동 -> 대전 유성구 도룡동, 30평대 아파트 이사, 사다리차 2회, 인력 4명 투입.</p>
+    <p><strong>고객 후기:</strong> "이사 날짜가 주말이라 걱정이 많았는데, 둔산동 신축 아파트 단지의 복잡한 입주 시간 조정까지 업체에서 다 처리해줘서 수월했어요. 짐 정리할 때 주방 용품 정리를 특히 꼼꼼하게 해주셔서 만족했습니다. <strong>대전 이사 비용</strong>이 조금 비싼 주말이었지만, 서비스 퀄리티를 생각하면 전혀 아깝지 않습니다."</p>
+  </div>
+  <div class="사례_카드">
+    <h3>[사례 2] 대전 중구 문화동 원룸 반포장이사 (2026년 6월)</h3>
+    <p><strong>이사 개요:</strong> 대전 중구 문화동 -> 대전 동구 가오동, 원룸 이사, 1톤 용달, 반포장 옵션 선택, 인력 2명 투입.</p>
+    <p><strong>고객 후기:</strong> "직장 때문에 바빠서 짐 정리를 할 시간이 없었어요. 반포장 이사를 선택했는데, 큰 짐 포장 및 운반을 해주시고 잔짐만 제가 정리하니 시간이 절약되었습니다. <strong>대전 원룸이사 비용</strong>도 30만원대로 합리적이었습니다. 중구 구도심의 좁은 골목길도 문제없이 운반해 주셨습니다."</p>
+  </div>
+  <div class="사례_카드">
+    <h3>[사례 3] 대전 유성구 노은동 사무실 이전 후기 (2026년 5월)</h3>
+    <p><strong>이사 개요:</strong> 대전 유성구 노은동 -> 대전 대덕구 읍내동, 사무실 30인 규모 이전, 서버 운송 특수팀 투입.</p>
+    <p><strong>고객 후기:</strong> "사무실 이사는 복잡해서 전문 업체를 찾았는데, 짐 포장부터 배선 작업까지 완벽하게 처리해주셔서 업무 중단이 거의 없었습니다. 노은동의 넓은 사무실 짐도 신속하게 옮겨주셨고, 직원들 PC 설치도 깔끔하게 마무리되었습니다. <strong>대전 사무실 이사</strong>는 역시 전문 업체에 맡겨야 한다는 것을 다시 느꼈습니다."</p>
+  </div>
+</section>
+
+<section id="무료견적신청" aria-label="무료 견적 신청">
+  <h2>대전 이사 무료 견적 신청하기 (최적 견적 산출)</h2>
+  <form action="/submit-estimate" method="POST" aria-describedby="견적폼설명">
+    <div class="info-block" style="background-color: #fcf8e3;">
+        <p><strong>[견적 신청 시 유의사항]</strong></p>
+        <p>보다 정확한 <strong>대전 이사 비용</strong>을 산출하기 위해, 짐의 양과 특이사항을 상세하게 입력해 주세요. 입력하신 정보를 바탕으로 가장 적합한 이사 솔루션을 제공해 드립니다. 견적 신청은 100% 무료입니다.</p>
+    </div>
+
+    <label for="이사유형">이사 유형 선택</label>
+    <select id="이사유형" name="type" required>
+      <option value="">이사 유형을 선택하세요</option>
+      <option value="포장이사">포장이사 (가장 일반적)</option>
+      <option value="반포장이사">반포장이사 (일부 정리 직접)</option>
+      <option value="원룸이사">원룸/오피스텔 이사</option>
+      <option value="사무실이사">사무실/기업이사</option>
+      <option value="보관이사">보관이사 (이사 날짜 불일치 시)</option>
+    </select>
+
+    <label for="출발지">출발지 (구체적인 주소)</label>
+    <input type="text" id="출발지" name="from" placeholder="예: 대전 서구 둔산동 (아파트명, 동호수까지 기재)" required />
+
+    <label for="도착지">도착지 (구체적인 주소)</label>
+    <input type="text" id="도착지" name="to" placeholder="예: 대전 유성구 도안동 (아파트명, 동호수까지 기재)" required />
+
+    <label for="이사일">이사 희망 예정일</label>
+    <input type="date" id="이사일" name="date" required />
+
+    <label for="이사시간대">희망 시간대</label>
+    <select id="이사시간대" name="time">
+      <option value="오전">오전 (9시-12시)</option>
+      <option value="오후">오후 (1시-5시)</option>
+      <option value="종일">종일 (시간대 협의)</option>
+    </select>
+
+    <label for="주거형태">현재 주거 형태</label>
+    <select id="주거형태" name="housing_type">
+      <option value="">선택하세요</option>
+      <option value="아파트">아파트</option>
+      <option value="빌라/다세대">빌라/다세대 주택</option>
+      <option value="단독주택">단독주택</option>
+      <option value="원룸/오피스텔">원룸/오피스텔</option>
+    </select>
+
+    <label for="짐양">짐의 양 (평형 또는 방 개수)</label>
+    <input type="text" id="짐양" name="volume" placeholder="예: 30평형 아파트, 원룸(1.5룸)" required />
+
+    <label for="특이사항">특이사항 (추가 비용 발생 요소)</label>
+    <textarea id="특이사항" name="details" rows="4" placeholder="사다리차 사용 유무(출발지/도착지), 에어컨 탈부착, 붙박이장 분해 조립, 피아노 등 특수 짐"></textarea>
+
+    <label for="연락처">연락처</label>
+    <input type="tel" id="연락처" name="phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required />
+
+    <button type="submit" class="cta">견적 요청하고 비용 비교하기</button>
+  </form>
+</section>
+
+<section id="자주묻는질문" aria-label="자주 묻는 질문 FAQ">
+  <h2>대전 이사 관련 자주 묻는 질문 (FAQ)</h2>
+  <dl class="faq">
+    <dt>Q. <strong>대전 이사 비용</strong>을 저렴하게 할 수 있는 방법이 있나요?</dt>
+    <dd>A. 네, 몇 가지 방법이 있습니다. 첫째, <strong>손 없는 날</strong>이나 주말을 피해 평일 이사를 하시면 비용을 절감할 수 있습니다. 둘째, 짐의 양을 최대한 줄여서 이사하는 것도 방법입니다. 셋째, 포장이사 대신 반포장이사(잔짐 직접 포장/정리)를 선택하면 인건비를 줄일 수 있습니다. 마지막으로, 여러 업체의 견적을 비교하는 것이 필수적입니다.</dd>
+
+    <dt>Q. 이사 중 짐 파손 시 보상은 어떻게 이루어지나요?</dt>
+    <dd>A. 저희는 정식 허가된 이사 전문업체로, 모든 이사 건에 대해 <a href="https://www.lpoint.com/app/cns/cns020600.do">이사화물운송주선사업자 배상책임보험</a>에 가입되어 있습니다. 이사 당일 파손된 물품이 있을 경우, 즉시 현장 담당자에게 알리고 사진을 촬영해 두시면 신속하게 보상 절차를 진행해 드립니다. 계약 시 보험 내용을 확인하는 것이 중요합니다.</dd>
+
+    <dt>Q. 대전 지역 이사 인원은 어떻게 구성되나요?</dt>
+    <dd>A. 짐의 양과 이사 유형에 따라 달라집니다. 원룸 이사는 보통 1~2명, 20평대 포장이사는 2~3명, 30평대 이상 포장이사는 4명 이상의 전문 인력이 투입됩니다. 사다리차 사용 시 사다리차 기사는 별도로 투입됩니다. 저희는 항상 정해진 인력 투입을 원칙으로 하며, 견적 시 투입 인원과 장비를 명확히 안내해 드립니다.</dd>
+
+    <dt>Q. <strong>대전 보관이사</strong>는 비용이 얼마나 추가되나요?</dt>
+    <dd>A. 보관이사는 이사 비용 외에 별도의 보관료가 발생합니다. 보관료는 짐의 양(평형)과 보관 기간에 따라 책정되며, 월 10만원에서 20만원(30평대 기준) 내외가 일반적입니다. 보관 창고의 환경(온습도 조절 여부)에 따라 비용이 달라질 수 있으므로, 보관 장소를 직접 확인하는 것도 좋은 방법입니다.</dd>
+
+    <dt>Q. 이사 견적을 받을 때 사다리차 비용이 포함되어 있나요?</dt>
+    <dd>A. 일반적으로 포장이사 견적에는 사다리차 비용이 별도로 명시됩니다. 층수와 작업 환경에 따라 사다리차 비용이 달라지므로, 견적서에서 사다리차 사용 유무와 가격을 반드시 확인해야 합니다. <strong>대전 이사 비용</strong>을 비교할 때, 사다리차 포함 여부를 꼭 확인하세요.</dd>
+
+    <dt>Q. <strong>대전 포장이사</strong>에서 입주청소 서비스를 함께 신청할 수 있나요?</dt>
+    <dd>A. 네, 가능합니다. 이사 후 입주청소는 짐이 없는 상태에서 진행하는 것이 가장 효율적입니다. 저희는 이사 서비스와 연계하여 입주청소 패키지를 제공하고 있습니다. 이사 당일 또는 이사 하루 전에 청소를 완료해 드립니다.</dd>
+  </dl>
+</section>
+
+<section id="문의하기" aria-label="문의하기">
+  <h2>대전 이사 문의 및 상담</h2>
+  <div class="정보_카드">
+    <p><strong>전화 문의:</strong> 010-1234-5678</p>
+    <p><strong>이메일 문의:</strong> <a href="mailto:info@yourdomain.kr">info@yourdomain.kr</a></p>
+    <p><strong>사업장 주소:</strong> 대전광역시 서구 둔산로 ○○</p>
+    <p><strong>영업시간:</strong> 월~토 09:00~19:00 (일요일 및 공휴일 휴무)</p>
+  </div>
+</section>
+
+<footer>
+  <p style="text-align:center; color:#777; font-size:0.9rem;">&copy; 2026 대전 이사 전문업체 | 사업자등록번호 123-45-67890 | 대전 서구, 유성구, 중구, 동구, 대덕구</p>
+</footer>
+
+
+  
